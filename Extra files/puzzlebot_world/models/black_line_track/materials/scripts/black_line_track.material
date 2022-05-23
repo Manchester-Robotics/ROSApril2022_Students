@@ -1,0 +1,14 @@
+material black_line_track
+{
+  technique
+  {
+    pass
+    {  
+      texture_unit
+      {
+        texture black_line_track.png
+        scale 1.0 1.0
+      }
+    }
+  }
+}
