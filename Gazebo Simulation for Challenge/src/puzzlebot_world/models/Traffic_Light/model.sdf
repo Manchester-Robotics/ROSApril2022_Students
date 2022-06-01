@@ -63,16 +63,10 @@
             <size>0.02 0.001 0.02</size>
           </box>
         </geometry>
-        <!--<plugin name="blink" filename="libBlinkVisualPlugin.so">
-            <color_a>1 0 0 1</color_a>
-            <color_b>0 0 1 0</color_b>
-            <period>3</period>
-            <use_wall_time>true</use_wall_time>
-        </plugin> -->
-        <!---->
         <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+            <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Green</name>
           </script>
         </material>
@@ -110,15 +104,10 @@
             <size>0.02 0.001 0.02</size>
           </box>
         </geometry>
-        <!-- <plugin name="blink" filename="libBlinkVisualPlugin.so">
-            <color_a>1 0 0 1</color_a>
-            <color_b>1 0 0 0</color_b>
-            <period>10</period>
-            <use_wall_time>true</use_wall_time>
-        </plugin>-->
        <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+            <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Grey</name>
           </script>
         </material>
@@ -151,21 +140,15 @@
       <!--visual for red light-->
       <visual name='visual'>
         <pose frame=''>0 -0.014 0.145 0 0 0</pose>
-        <!-- original but I would reduce to one and cero -->
         <geometry>
           <box>
             <size>0.02 0.001 0.02</size>
           </box>
         </geometry>
-        <!-- <plugin name="blink" filename="libBlinkVisualPlugin.so">
-            <color_a>1 0 0 1</color_a>
-            <color_b>1 0 0 0</color_b>
-            <period>10</period>
-            <use_wall_time>true</use_wall_time>
-        </plugin>-->
         <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+            <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Grey</name>
           </script>
         </material>
