@@ -1,34 +1,35 @@
 
 # Gazebo Simulation for Challenge
-This package contains the gazebo files to run the robot model and the track for the Manchester Robotics - Tec Challenge 2022 for Robotica inteligente lecture.
+This package contains the gazebo simulation files to run the robot model and the track for the Manchester Robotics - Tec Challenge 2022 for the Robotica inteligente lecture.
  
 ## Installation
 
-Download the included folders and  add the folder in your usual catkin worspace, or create a new catkin workspace with folders. Up to you.  
+Download the included folders and merge the folder `src`  in your usual catkin workspace (usually `~/catkin_ws/src`) , or create a new catkin workspace with the folders. Up to you.  
 
 If you have already the folders in your catkin workspace Merge the folder, and replace the duplicated files.  
 
 ## Usage
 
-The parameters as they are once you run it should be good enough for you to work. To test it run following comand. 
+The parameters as they are should be good enough for you to start working. To test it, run following command: 
 
  `roslaunch puzzlebot_world puzzlebot_tec_challenge.launch` 
-
-You are going to see the following gazebo screen
 
 The robot topics should be exactly the same, except for the camera. 
 
 The puzzlebot will have the topic `/video_source/raw` , and the simulation will create a topic called  `/camera/image_raw` 
 
-My suggestion is to create a mode file for the simulation only, and have another one for the real robot.  
+My suggestion is to create a ROS Node file for the simulation only, and have another one for the real robot, as you will have to tune both.  
 
-- ### If you need to modify the camera settings
+- ### If you need to modify the camera settings (OPTIONAL).
 
-There are included in the files two cameras, the standard regular, and a wide angle one. After testing the regular should be enough but if you 
-want to optimise the camera performance are welcome to get into the file, comment the standard camera code, and uncomment the wide angle. 
-The path file to this setting is: 
+There are included in the files two cameras, the standard regular, and a wide-angle one. After testing, the regular should be enough but if you 
+want to optimise the camera performance, you are welcome. To change camera settings, get into the file:
 
 > puzzlebot_gazebo/urdf/puzzlebot.gazebo
+
+The wide-angle camera is commented. Just uncomment the plugin code you prefer to use, and comment the other camera. This is done with the comment tags:
+
+`<!-- sensor code inside -->`
 
 For parameters , please refer to the references included.  
 
