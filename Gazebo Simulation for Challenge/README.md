@@ -29,7 +29,7 @@ want to optimise the camera performance, you are welcome. To change camera setti
 
 The wide-angle camera is commented. Just uncomment the plugin code you prefer to use, and comment the other camera. This is done with the comment tags:
 
-`<!-- sensor code inside -->`
+`<!-- camera plugin code inside -->`
 
 For parameters , please refer to the references included.  
 
