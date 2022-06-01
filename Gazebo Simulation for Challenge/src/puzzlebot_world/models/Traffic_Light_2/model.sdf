@@ -61,6 +61,7 @@
       <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+            <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Grey</name>
           </script>
         </material>
@@ -101,6 +102,7 @@
          <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+            <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Grey</name>
           </script>
         </material>
@@ -134,6 +136,7 @@
       <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
+	    <!--CHANGE ME TO CHANGE THE COLOR-->
             <name>Gazebo/Red</name>
           </script>
         </material>
