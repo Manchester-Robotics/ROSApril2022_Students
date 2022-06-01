@@ -39,7 +39,7 @@ Short anwser is manually. The plugin is behaving oddly. We are working on fixing
 
 To change the parameter you need to access the SDF file, very similar to the URDF files we tackled in class. In the simulation you have two diffent traffic lights: Traffic_Light, and Traffic_Light2.
 
-There is a folder for each one (with the same name) in the following path:
+There is a folder for each one (with the corresponding name) in the following path:
 
 > puzzlebot_world/models/
 
