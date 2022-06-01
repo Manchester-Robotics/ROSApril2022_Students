@@ -1,0 +1,207 @@
+<?xml version="1.0" ?>
+<!-- PuzzleBot differential drive -->
+<robot name="puzzlebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- files for gazebo costumization -->
+<xacro:include filename="$(find puzzlebot_gazebo)/urdf/materials.xacro" />
+<xacro:include filename="$(find puzzlebot_gazebo)/urdf/parameters.xacro" />
+<xacro:include filename="$(find puzzlebot_gazebo)/urdf/puzzlebot.gazebo" />
+<xacro:include filename="$(find puzzlebot_gazebo)/urdf/macros.xacro" />  
+
+<!-- Dummy link to fiz robot chassis -->
+  <link name="base_link">
+    <pose>0 0 0 0 0 0</pose>
+  </link>
+  
+  <joint name="base_link_to_chassis" type="fixed">
+	   <parent link="base_link"/>
+	   <child link="chassis"/>
+  </joint>
+
+  <link name="chassis">
+    <pose>0 0 0 0 0 0</pose>
+    <visual>
+    <!-- box only 
+      <origin xyz="0 0 0" rpy="0 0 0"/>        
+          <geometry>
+          	  <box size="${chassisX} ${chassisY} ${chassisZ}"/> 
+          </geometry> -->
+
+       <!-- with mesh  -->
+      <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+          <geometry>
+          	 <mesh filename="file://${mesh_chassis}"/>
+          </geometry> 
+    </visual>
+
+    <collision name="collision_chassis">
+    	<origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            	 <box size="${chassisX} ${chassisY} ${chassisZ}"/> 
+          </geometry>
+    </collision>
+    <inertial>
+      <mass value="${chassisMass}"/>    
+      <xacro:box_inertia m="${chassisMass}" x="${chassisX}" y="${chassisY}" z="${chassisZ}" />
+    </inertial>
+
+   <!-- agregar caster wheel en frame --> 
+    <collision>
+	    <origin xyz="-0.095 0 -0.0425" rpy="0 0 0"/>
+		  <geometry>
+		     <sphere radius="${casterRadius}"/>
+		  </geometry>
+		        <surface>
+	      <friction>
+	         <ode>
+	          <slip1>0.0</slip1>
+	          <slip2>0.0</slip2>
+	         </ode>
+	      </friction>
+      </surface>
+	  </collision>
+
+	  <visual>
+      <origin xyz="-0.095 0 -0.0425" rpy="0 0 0"/>
+          <geometry>
+          	   <sphere radius="${casterRadius}"/>
+          </geometry>
+    </visual>
+ 
+  </link>
+
+ <!--RIGHT WHEEL -->
+	<link name="right_wheel">
+	  <visual>
+	  	<origin xyz="0 0 0" rpy="-${PI/2} 0 0" />
+	    <geometry>
+	      <!-- with mesh-->
+	      	<mesh filename="file://${mesh_wheel}"/>
+	    	<!-- cylinder only 
+	    	<cylinder length="${wheelHeight}" radius="${wheelRadius}"/> -->
+	    </geometry>
+	  </visual>
+
+	  <collision>
+		  <origin xyz="0 0 0 " rpy="-${PI/2} 0 0"/>
+			  <geometry>
+			     <cylinder length="${wheelHeight}" radius="${wheelRadius}" />
+			  </geometry>
+	  </collision>
+	    
+	  <inertial>
+		  <mass value="${wheelMass}"/>
+		  <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+		  <xacro:wheel_inertia r="${wheelRadius}" l="${wheelHeight}" m="${wheelMass}"/> 
+	  </inertial> 
+	  
+	</link>
+
+<!-- LEFT WHEEL -->
+	<link name="left_wheel">
+	  <visual>
+	    <geometry>
+        <!-- with mesh-->
+	      	<mesh filename="file://${mesh_wheel}"/>
+	    	<!-- cylinder only 
+	    	<cylinder length="${wheelHeight}" radius="${wheelRadius}"/> -->
+	    </geometry>
+	    <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+	  </visual>
+	  
+	  <collision>
+		  <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+		  <geometry>
+		     <cylinder length="${wheelHeight}" radius="${wheelRadius}"/>
+		  </geometry>
+	  </collision>
+	    
+	  <inertial>
+		  <mass value="${wheelMass}"/>
+		  <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+		  <xacro:wheel_inertia r="${wheelRadius}" l="${wheelHeight}" m="${wheelMass}" />
+	  </inertial> 
+	</link>
+	     	  
+	 <!-- CAMERA-->
+	 <link name="camera">
+		    <inertial>
+		    	    <origin rpy="0 0 0" xyz="0 0 0"/>
+		          <mass value="0.007"/>
+		          <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+		          <!-- ad camera inertia -->
+		    </inertial>
+
+		    <collision name="collision_chassis">
+		    	    <origin rpy="0 0 0" xyz="0 0 0"/>
+		          <geometry>
+		               <box size="0.05 0.01 0.06" />
+		          </geometry> 
+		    </collision>
+
+		    <visual>
+		    	    <!-- box only 
+		    	    <origin rpy="$0 0 ${PI/2}" xyz="0 0 0"/>
+		          <geometry>
+		          	<box size="0.05 0.01 0.06" />
+		          </geometry>-->
+ 
+		         <!-- with mesh--> 
+		          <origin rpy="${PI/2} 0 ${PI/2}" xyz="0 0 0"/>
+		          <geometry>
+		          	<mesh filename="file://${mesh_camera}"/>
+		          </geometry>
+		    </visual>
+  </link> 
+
+
+<!-- JOINTS  --> 
+ 
+  <joint name="base_to_right_w" type="continuous">
+	  <parent link="chassis" />
+	  <child link="right_wheel" />
+	  <origin xyz="0.05 -0.09 0.0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
+	<!--	<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>-->
+	</joint>
+
+	<joint name="base_to_left_w" type="continuous">
+	  <parent link="chassis" />
+	  <child link="left_wheel" />
+	  <origin xyz="0.05 0.09 0" />
+	  <axis xyz="0 1 0" rpy="0 0 0" />
+		<!--<limit effort="100" velocity="100"/>
+		<joint_properties damping="0.0" friction="0.0"/>-->
+	</joint>
+
+<!---->
+<joint name="camera_to_base" type="fixed">
+	  <parent link="chassis" />
+	  <child link="camera" />
+	  <origin xyz="0.09 0 0.048" rpy= "0.0 0.24 0.0" />	
+  </joint>
+  
+<!-- TRANSMISSIONS (For a more complex model and it represents actuator attributes) -->
+<transmission name="right_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="base_to_right_w">
+    	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_wheel_motor">
+      <mechanicalReduction>34</mechanicalReduction>
+       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+<transmission name="left_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="base_to_left_w">
+    	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_wheel_motor">
+      <mechanicalReduction>34</mechanicalReduction>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+</transmission>  
+</robot>

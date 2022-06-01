@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- note to self: modify this to add wheel as left and right with -->
+    
+    <xacro:macro name="box_inertia" params="m x y z">
+            <inertia
+          ixx="${m/12.0 * (y*y + z*z)}" ixy="0.0" ixz="0.0"
+          iyy="${m/12.0 * (z*z + x*x)}" iyz="0.0"
+          izz="${m/12.0 * (y*y + x*x)}"/>
+        <!--  <inertia
+          ixx="0.001" ixy="0.0" ixz="0.0"
+          iyy="0.001" iyz="0.0"
+          izz="0.001"/>-->
+    </xacro:macro>
+
+    <xacro:macro name="wheel_inertia" params="r l m">
+              <!--<inertia  ixx="${m*(3*r*r+l*l)/12}" ixy = "0" ixz = "0"
+                iyy="${m*(3*r*r+l*l)/12}" iyz = "0"
+                izz="${m*(r*r)/2}" />-->
+              <!--  <inertia  ixx="0.00001" ixy = "0" ixz = "0"
+                iyy="0.00001" iyz = "0"
+                izz="0.00001" />-->
+               <inertia  ixx="${(m/12)*(3*((r*r)+((r/4)*(r/4)))+(l*l))}" ixy="0" ixz="0"
+                iyy="${(m/12)*(3*((r*r)+((r/4)*(r/4)))+(l*l))}" iyz="0"
+                izz="${(m/2)*(r*r+(r/4)*(r/4))}" />
+    </xacro:macro>
+  
+</robot>

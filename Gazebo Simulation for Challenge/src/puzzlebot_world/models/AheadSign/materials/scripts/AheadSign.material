@@ -1,0 +1,13 @@
+material AheadSign
+{
+  technique
+  {
+    pass
+    {  
+      texture_unit
+      {
+        texture ahead_sign.png
+      }
+    }
+  }
+}

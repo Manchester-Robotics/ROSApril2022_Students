@@ -1,0 +1,183 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='Traffic_Light_2'>
+    <link name='base'>
+      <!--visual for base-->
+      <visual name='visual'>
+        <pose frame=''>0 0 0.06 1.5707 0 0</pose>
+          <geometry>
+          <!-- geometrical shape 
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.10</length>
+            </cylinder>-->
+          <!--mesh-->
+            <mesh>
+                  <uri>model://Traffic_Light/meshes/traffic_light_stand.stl</uri>
+                  <scale>1 1 1</scale>
+            </mesh>
+          </geometry>	
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+      </visual>
+      <!--collision for base-->
+      <collision name='collision'>
+        <pose frame=''>0 0 0.12 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.12</length>
+            </cylinder>
+          </geometry>
+      </collision>
+      <!--inertial for base-->
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>0.015</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>      
+    </link>
+    <link name='green_light'>
+    <!--visual for green light-->  
+      <visual name='visual'>
+      <pose frame=''>0 -0.014 0.098 0 0 0</pose>
+       <!--<pose frame=''>0 0 0 0 -0 0</pose>-->
+        <geometry>
+          <box>
+            <size>0.02 0.001 0.02</size>
+          </box>
+        </geometry>
+      <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+      <!--collision for green light 
+      <collision name='collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 0.001 0.02</size>
+          </box>
+        </geometry>
+      </collision>-->  
+      <!--inertial for green light-->
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='amber_light'>  
+      <!--visual for amber light-->
+      <visual name='visual'>
+      <pose frame=''>0 -0.014 0.122 0 0 0</pose>
+        <!--<pose frame=''>0 0 0 0 -0 0</pose>-->
+        <geometry>
+          <box>
+            <size>0.02 0.001 0.02</size>
+          </box>
+        </geometry>
+         <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+	</visual>
+      <!--collision for amber light-->
+      <!--inertial for amber light-->
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>
+      <!--additionals for amber light-->
+    </link>
+    <link name='red_light'>
+      <!--visual for red light-->
+      <visual name='visual'>
+        <pose frame=''>0 -0.014 0.145 0 0 0</pose>
+        <!-- original but I would reduce to one and cero -->
+        <geometry>
+          <box>
+            <size>0.02 0.001 0.02</size>
+          </box>
+        </geometry>
+      <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+      <!--collision for red light
+      <collision name='collision'>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 0.001 0.02</size>
+          </box>
+        </geometry>
+      </collision>-->
+      <!--Inertial for red light-->
+      <inertial>
+       <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <!--Joint-->
+    <joint name='joint_red' type='fixed'>
+      <parent>base</parent>
+      <child>red_light</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+    </joint>
+    <joint name='joint_amber' type='fixed'>
+      <parent>base</parent>
+      <child>amber_light</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+    </joint>
+    <joint name='joint_green' type='fixed'>
+      <parent>base</parent>
+      <child>green_light</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+    </joint>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

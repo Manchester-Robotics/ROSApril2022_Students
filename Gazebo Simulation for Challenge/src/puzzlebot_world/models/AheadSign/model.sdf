@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='AheadSign'>
+    <link name='base'>
+      <!--visual for base-->
+      <visual name='visual'>
+      <pose frame=''>0 0 0.06 1.5707 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://AheadSign/meshes/Sign_pedestal.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <!--collision for base-->
+      <collision name='collision'>
+       <pose frame=''>0 0 0.12 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius>
+            <length>0.12</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <!--inertial for base-->
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>0.015</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>      
+    </link>
+    <link name='sign'>
+    <!--visual for sign-->  
+      <visual name='visual'>
+      <pose frame=''>0 -0.006 0.12 1.57 0 0</pose> 
+        <geometry>
+        <mesh>
+            <uri>model://AheadSign/meshes/AheadSign.dae</uri>
+            <scale>1 1 1</scale>
+         </mesh>
+        </geometry>
+        <material>
+        <script>
+            <uri>model://AheadSign/materials/scripts</uri>
+            <uri>model://AheadSign/materials/textures/</uri>
+            <name>AheadSign</name>
+         </script>
+        </material>
+      </visual>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>
+    </link>
+  <!--Joint-->
+    <joint name='joint_sign' type='fixed'>
+      <parent>base</parent>
+      <child>sign</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+    </joint>
+  </model>
+</sdf>

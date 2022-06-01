@@ -1,0 +1,13 @@
+material TurnRightSign
+{
+  technique
+  {
+    pass
+    {  
+      texture_unit
+      {
+        texture right_turn_sign.png
+      }
+    }
+  }
+}

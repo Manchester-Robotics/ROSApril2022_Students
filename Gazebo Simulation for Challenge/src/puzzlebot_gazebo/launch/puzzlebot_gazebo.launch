@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+ <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="false"/>
+  <arg name="headless" default="true"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find puzzlebot_world)/worlds/puzzlebot_challenge2.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+  
+  <!--load robot description -->
+   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find puzzlebot_gazebo)/urdf/puzzlebot.xacro'" />
+    
+    <arg name="x" default="-0.8"/>
+    <arg name="y" default="-0.8"/>
+    <arg name="z" default="0.0"/>
+    
+  <node name="puzzlebot_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen"
+          args="-urdf -param robot_description -model puzzlebot -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  </node>
+
+  <node name="joint_state_publisher"  pkg="joint_state_publisher" type="joint_state_publisher"> 
+  </node>
+
+  <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
+  <node name="puzzlebot_odom" pkg="puzzlebot_gazebo" type="tf_map.py"/>
+<include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>"
+<node name = "rviz" pkg="rviz" type = "rviz" args = "-d $(find puzzlebot_gazebo)/config_files/robot_example.rviz" required = "true"/>
+</launch>
+
+  

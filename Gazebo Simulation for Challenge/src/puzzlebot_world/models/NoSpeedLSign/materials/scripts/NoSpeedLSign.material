@@ -1,0 +1,13 @@
+material NoSpeedLSign
+{
+  technique
+  {
+    pass
+    {  
+      texture_unit
+      {
+        texture no_speed_sign.png
+      }
+    }
+  }
+}
