@@ -65,7 +65,7 @@
         </geometry>
        <plugin name="color timed" filename="libcolor_timer_plugin.so">
           <color>0 1 0 0</color>
-          <period>10</period>
+          <period>20</period>
           <use_wall_time>true</use_wall_time>
        </plugin>
       </visual>
@@ -145,7 +145,7 @@
         </geometry>
         <plugin name="color timed" filename="libcolor_timer_plugin.so">
           <color>1 0 0 1</color>
-          <period>10</period>
+          <period>20</period>
           <use_wall_time>true</use_wall_time>
        </plugin>
       </visual>
