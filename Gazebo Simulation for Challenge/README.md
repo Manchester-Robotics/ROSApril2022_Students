@@ -12,7 +12,7 @@ If you have already the folders in your catkin workspace Merge the folder, and r
 
 The parameters as they are should be good enough for you to start working. To test it, run following command: 
 
- `roslaunch puzzlebot_world puzzlebot_tec_challenge.launch` 
+ `roslaunch puzzlebot_world puzzlebot_tec_challenge_update.launch` 
 
 The robot topics should be exactly the same, except for the camera. 
 
@@ -35,63 +35,7 @@ For parameters , please refer to the references included.
 
 - ### How am I supposed to switch the traffic lights on and off? 
 
-Short anwser is manually. The plugin is behaving oddly. We are working on fixing it, but for now you can modify the color manually. You need to run the simulation after every change. We will keep you post it about the plugin. 
-
-To change the parameter you need to access the SDF file, very similar to the URDF files we tackled in class. In the simulation you have two diffent traffic lights: Traffic_Light, and Traffic_Light2.
-
-There is a folder for each one (with the corresponding name) in the following path:
-
-> puzzlebot_world/worlds/
-
-Inside this path, you will find a file called "puzzlebot_tec_challenge.world". As we learned in class this will have one base for the trafic light, and each light as a link. 
-
-Here is the example code for a green light. 
-
-> <link name='green_light'>
-  <!--visual for green light-->  
-      <visual name='visual'>
-      <pose frame=''>0 -0.014 0.098 0 0 0</pose>
-       <!--<pose frame=''>0 0 0 0 -0 0</pose>-->
-        <geometry>
-          <box>
-            <size>0.02 0.001 0.02</size>
-          </box>
-        </geometry>    
-        <material>
-          <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-           <!-- EDIT ME FOR CHANGING COLOR--> 
-           <name>Gazebo/Green</name>
-          </script>
-        </material>
-      </visual>
-      <!--collision for green light 
-      <collision name='collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.02 0.001 0.02</size>
-          </box>
-        </geometry>
-      </collision>-->  
-      <!--inertial for green light-->
-      <inertial>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <mass>0.001</mass>
-        <inertia>
-          <ixx>0.166667</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.166667</iyy>
-          <iyz>0</iyz>
-          <izz>0.166667</izz>
-        </inertia>
-      </inertial>
-    </link>
-    
-You need then to change color in the line `<name>Gazebo/Green</name>`. Red, Yellow, Orange, Green, and Gray for off are the color useful for you. 
-
-Save the file, and you are ready to relaunch the simulation. No need to recompile catkin.  
+You don't have to. Download the lastest version and lights (green and red) should be automatically working in both traffics lights.  The lights will change every 20 seconds. 
 
 - ### If you need more signs or I want to change them.
 You can just drag them around with the "Translate mode" which let you move linearly the object. Check the "Gazebo GUI Reference" if you need help finding these options.   
