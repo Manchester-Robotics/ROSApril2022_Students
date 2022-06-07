@@ -41,9 +41,9 @@ To change the parameter you need to access the SDF file, very similar to the URD
 
 There is a folder for each one (with the corresponding name) in the following path:
 
-> puzzlebot_world/models/
+> puzzlebot_world/worlds/
 
-Inside each folder, you will find a file called "model.sdf". As we learned in class this will have one base for the trafic light, and each light as a link. 
+Inside this path, you will find a file called "puzzlebot_tec_challenge.world". As we learned in class this will have one base for the trafic light, and each light as a link. 
 
 Here is the example code for a green light. 
 
